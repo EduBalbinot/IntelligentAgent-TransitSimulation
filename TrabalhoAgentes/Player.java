@@ -11,17 +11,22 @@ import javax.swing.*;
 public class Player extends SwingWorker<Object, Object> {
     private pnPrincipal panel;
     private boolean executar;
+    private boolean canTurn;
+    private boolean collidingCar;
     private double positionX;
     private double positionY;
-    private int width;
-    private int height;
-    private Color color;
     private double velocity;
     private double directionX;
     private double directionY;
+    private double width;
+    private double height;
+    private double aceleration;
+    private Color color;
+    private Boundary lastWall;
+
     private int ang;
 
-    public Player(pnPrincipal panel, double x, double y, int w, int h, int vx){
+    public Player(pnPrincipal panel, double x, double y, double w, double h, int vx){
         this.panel=panel;
         this.positionX=x;
         this.positionY=y;
@@ -29,27 +34,59 @@ public class Player extends SwingWorker<Object, Object> {
         this.height=h;
         this.directionX = vx;
         this.directionY = 1 - vx;
+        this.canTurn = true;
         this.velocity = 3;
         this.executar = true;
         this.color = new Color(ThreadLocalRandom.current().nextInt(255),ThreadLocalRandom.current().nextInt(255),ThreadLocalRandom.current().nextInt(255));
         this.ang = 0;
+        this.aceleration=0.5;
+        this.collidingCar=false;
     }
 
     @Override
     public String doInBackground() {        
         while (this.executar) {
 			try {
-                if(this.checkColision(panel.getWalls("wall"))){
+                // if(this.canTurn) this.color = Color.GREEN;
+                // else this.color = Color.RED;
+                if(this.checkColision(panel.getWalls("wall"), true)){ //Colisão com paredes
                     this.turn(); 
-                    // turnAnimation();
                 }
-                String[] gates = {"r","d","l","u"};
+                if(this.checkColision(panel.getWalls("0"), true)){ //Colisão com trigger de curva 
+                    this.canTurn=true;
+                }
+                if(this.checkTransit(panel.getBots())){
+                    this.collidingCar=true;
+                } else {
+                    this.collidingCar=false;
+                    if(this.checkColision(panel.getWalls("tLight"), false)){ //Colisão com semáforo (contínua)
+                        //lastWall=null;
+                        if(lastWall.getColor()==Color.GREEN){
+                            this.collidingCar=false;
+                        } else {
+                            this.collidingCar=true;
+                        }   
+                    }
+                }
+                
 
+                String[] gates = {"r","d","l","u"}; //Colisão com curvas
                 for (String gate : gates) { // lógica para virar em cruzamentos (50% de chance)
-                    if(this.checkColision(panel.getWalls(gate))&&ThreadLocalRandom.current().nextBoolean()){
-                        char randomDir = gate.charAt(new Random().nextInt(gate.length()));
-                        newDirection(randomDir);
+                    if(this.checkColision(panel.getWalls(gate),true)&&ThreadLocalRandom.current().nextBoolean()&&this.canTurn){
+                        //char randomDir = gate.charAt(new Random().nextInt(gate.length())); // Pra mais de uma direção
+                        newDirection(gate.charAt(0));
                     } 
+                }
+
+                // if(this.checkTransit(panel.getBots())){
+                //    this.slowDown();
+                // } 
+
+              
+                if(this.collidingCar){
+                    this.slowDown();
+                } else {
+                    this.speedUp();
                 }
 
                 this.positionY = this.positionY + (directionY * velocity);
@@ -70,7 +107,6 @@ public class Player extends SwingWorker<Object, Object> {
     @Override
 	protected void done() {
 		try {
-			//label.setText(get());
 		} catch (Exception ignore) {
 		}
 	}
@@ -88,31 +124,57 @@ public class Player extends SwingWorker<Object, Object> {
     }
 
     public void newDirection(char d){
-        this.directionX = 0;
-        this.directionY = 0;
+        canTurn=false;
+        int pathWidth = pnPrincipal.stWidth * 3;
+        int pathHeight = pnPrincipal.stHeight * 3;
         switch(d){
             case 'u':
-                this.positionX += pnPrincipal.stWidth*3/2 - this.height/2;
-                this.positionY -= this.width - this.height ;
+            if(this.directionX < 0){
+                this.positionX += pathWidth / 2 - this.height / 2;
+                this.positionY += this.height - this.width;
+            }else{
+                this.positionX += this.width - pathWidth / 2 - this.height / 2;
+                this.positionY += this.height - this.width;
+            }
                 turnXtoY();
+                this.directionX = 0;
                 this.directionY = -1;
             break;
             case 'd':
-                this.positionX += this.width - pnPrincipal.stWidth*3/ 2 - this.height/2;
-                this.positionY -= 0;
+            if(this.directionX > 0){
+                this.positionX += this.width - pathWidth / 2 - this.height / 2;
+                this.positionY += 0;
+            }else{
+                this.positionX += pathWidth/2 -this.height / 2;
+                this.positionY +=0;
+            }
                 turnXtoY();
+                this.directionX = 0;
                 this.directionY = 1;
             break;
             case 'l':
-                this.positionY += this.height - pnPrincipal.stHeight*3/2 - this.width/2 -2;
+            if(this.directionY > 0){
                 this.positionX += this.width - this.height;
+                this.positionY += this.height - pathHeight / 2 - this.width / 2;
+            }else{
+                this.positionX += this.width - this.height;
+                this.positionY += pathHeight / 2 - this.width / 2;
+            }
                 turnXtoY();
                 this.directionX = -1;
+                this.directionY = 0;
             break;
             case 'r':
-                this.positionY += pnPrincipal.stHeight*3/2 - this.width/2;
+            if(this.directionY < 0){
+                this.positionX += 0;
+                this.positionY += pathHeight / 2 - this.width / 2;
+            }else{
+                this.positionX += 0;
+                this.positionY += this.height - pathHeight / 2 -this.width / 2;
+            }
                 turnXtoY();
                 this.directionX = 1;
+                this.directionY = 0;
             break;
         }
     }
@@ -134,25 +196,91 @@ public class Player extends SwingWorker<Object, Object> {
     //     ang=0;
     //     this.turnXtoY();
     // }
+    private void slowDown(){
+        if(this.velocity>0){
+            this.velocity-=this.aceleration;
+            if(this.velocity<0)
+                this.velocity=0;
+        }
+    }
 
-    Boundary lastWall;
-    private boolean checkColision(ArrayList<Boundary> walls) {
-        //if(velocity>0)
-        for (Boundary wall : walls) {
-            if(this.positionX + this.width >= wall.getPositionX() && this.positionX <= wall.getPositionX() + wall.getWidth() &&
-               this.positionY + this.height > wall.getPositionY() && this.positionY <= wall.getPositionY() + wall.getHeight()&&
-               !(lastWall==wall)){
-                System.out.println(wall);
-                //this.velocity=0;
-                lastWall = wall;
-                return true;
+    private void speedUp(){
+        if(this.velocity<3){
+            this.velocity+=this.aceleration;
+            if(this.velocity>3)
+                this.velocity=3;
+        }
+    }
+
+    private double thisRightSideX;
+    private double thisLeftSideX;
+    private double botRightSideX;
+    private double botLeftSideX;
+    private double thisTopSideY;
+    private double thisBotSideY;
+    private double botTopSideY;
+    private double botBotSideY;
+
+    private boolean checkTransit(ArrayList<Player> bots) {
+        for (Player bot : bots) {
+            if(bot!=this){
+                double carsDistance = 20;
+                double sumRight     = 0;
+                double sumTop       = 0;
+                double sumLeft      = 0;
+                double sumBotton    = 0;
+
+                if(directionX>0)
+                    sumRight =carsDistance;
+                if(directionX<0)
+                    sumLeft =carsDistance;
+                if(directionY>0)
+                    sumBotton =carsDistance;
+                if(directionY<0)
+                    sumTop =carsDistance;
+
+                thisRightSideX = this.positionX + this.width + sumRight;
+                thisLeftSideX = this.positionX - sumLeft;
+                thisTopSideY = this.positionY - sumTop;
+                thisBotSideY = this.positionY + this.height + sumBotton;
+                botRightSideX = bot.getPositionX();
+                botLeftSideX = bot.getPositionX() + bot.getWidth();
+                botTopSideY = bot.getPositionY();
+                botBotSideY = bot.getPositionY() + bot.getHeight();
+                //this.collidingCar = false;
+                if(thisRightSideX >= botRightSideX && thisLeftSideX <= botLeftSideX &&
+                thisBotSideY > botTopSideY && thisTopSideY <= botBotSideY){
+                    //this.color = Color.RED;
+                    this.collidingCar = true;
+                    return true;
+                }
             }
         }
         return false;
     }
 
+    private boolean checkColision(ArrayList<Boundary> walls, boolean first) {
+        for (Boundary wall : walls) {
+            thisRightSideX = this.positionX + this.width;
+                thisLeftSideX = this.positionX;
+                botRightSideX = wall.getPositionX();
+                botLeftSideX = wall.getPositionX() + wall.getWidth();
+                thisTopSideY = this.positionY;
+                thisBotSideY = this.positionY + this.height;
+                botTopSideY = wall.getPositionY();
+                botBotSideY = wall.getPositionY() + wall.getHeight();
+                if(!(lastWall==wall)||!first)
+                    if(thisRightSideX >= botRightSideX && thisLeftSideX <= botLeftSideX &&
+                        thisBotSideY > botTopSideY && thisTopSideY <= botBotSideY){
+                        lastWall = wall;
+                        return true;
+                    }
+        }
+        return false;
+    }
+
     public void turnXtoY(){
-        int tempWidth = this.width;
+        double tempWidth = this.width;
         this.width = this.height;
         this.height = tempWidth; 
     }
@@ -173,7 +301,7 @@ public class Player extends SwingWorker<Object, Object> {
         this.positionY = y;
     }
 
-    public int getWidth() {
+    public double getWidth() {
         return width;
     }
 
@@ -181,7 +309,7 @@ public class Player extends SwingWorker<Object, Object> {
         this.width = w;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
 

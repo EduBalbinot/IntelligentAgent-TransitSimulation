@@ -8,7 +8,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.awt.geom.AffineTransform;
 
-
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -44,6 +43,7 @@ public class pnPrincipal extends JPanel implements ActionListener {
         add(Box.createVerticalGlue());
 
         map = new String[][] 
+        // mão inglesa
         // {{"3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3"},
         //  {"3", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
         //  {"3", "-", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "-"},
@@ -69,28 +69,48 @@ public class pnPrincipal extends JPanel implements ActionListener {
         
         {{"3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3"},
         {"3", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
-        {"3", "-", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", "-"},
+        {"3", "-", " ", " ", " ", " ", " ", "0", " ", "d", " ", " ", " ", " ", " ", "0", " ", "d", " ", " ", " ", " ", " ", "0", " ", "d", " ", " ", " ", " ", " ", "0", " ", "d", " ", " ", " ", " ", " ", "0", " ", "d", " ", " ", " ", "-"},
         {"1", "-", " ", " ", "r", "=", " ", "=", " ", "=", " ", " ", "r", "=", " ", "=", " ", "=", " ", " ", "r", "=", " ", "=", " ", "=", " ", " ", "r", "=", " ", "=", " ", "=", " ", " ", "r", "=", " ", "=", " ", "=", " ", " ", " ", "-"},
-        {"3", "-", " ", " ", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", "-"},
+        {"3", "-", " ", " ", " ", " ", " ", "0", " ", " ", " ", "d", " ", " ", " ", "0", " ", " ", " ", "d", " ", " ", " ", "0", " ", " ", " ", "d", " ", " ", " ", "0", " ", " ", " ", "d", " ", " ", " ", "0", " ", " ", " ", "d", " ", "-"},
         {"3", "-", "r", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-"},
         {"3", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-"},
-        {"3", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-"},
+        {"3", "-", "0", "|", "0", "-", "-", "-", "-", "-", "0", "|", "0", "-", "-", "-", "-", "-", "0", "|", "0", "-", "-", "-", "-", "-", "0", "|", "0", "-", "-", "-", "-", "-", "0", "|", "0", "-", "-", "-", "-", "-", "0", "|", "0", "-"},
         {"3", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-"},
-        {"3", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", "l", "-", "-", "-", "-", "-", " ", "|", "l", "-", "-", "-", "-", "-", " ", "|", "l", "-", "-", "-", "-", "-", " ", "|", "l", "-", "-", "-", "-", "-", " ", "|", "l", "-"},
-        {"3", "-", " ", "u", " ", " ", " ", " ", " ", "d", " ", "u", " ", " ", " ", " ", " ", "d", " ", "u", " ", " ", " ", " ", " ", "d", " ", "u", " ", " ", " ", " ", " ", "d", " ", "u", " ", " ", " ", " ", " ", " ", " ", " ", " ", "-"},
+        {"3", "-", " ", "|", " ", "-", "-", "-", "-", "-", "s0", "|", "l", "-", "-", "-", "-", "-", "s0", "|", "l", "-", "-", "-", "-", "-", "s0", "|", "l", "-", "-", "-", "-", "-", "s0", "|", "l", "-", "-", "-", "-", "-", " ", "|", "l", "-"},
+        {"3", "-", " ", "u", " ", " ", " ", "0", " ", "d", " ", "u", " ", "s3", " ", "0", " ", "d", " ", "u", " ", "s3", " ", "0", " ", "d", " ", "u", " ", "s3", " ", "0", " ", "d", " ", "u", " ", "s3", " ", "0", " ", " ", " ", " ", " ", "-"},
         {"1", "-", " ", " ", "r", "=", " ", "=", " ", "=", "l", " ", "r", "=", " ", "=", " ", "=", "l", " ", "r", "=", " ", "=", " ", "=", "l", " ", "r", "=", " ", "=", " ", "=", "l", " ", "r", "=", " ", "=", " ", "=", "l", " ", " ", "-"},
-        {"3", "-", " ", " ", " ", " ", " ", " ", " ", " ", " ", "d", " ", "u", " ", " ", " ", " ", " ", "d", " ", "u", " ", " ", " ", " ", " ", "d", " ", "u", " ", " ", " ", " ", " ", "d", " ", "u", " ", " ", " ", " ", " ", "d", " ", "-"},
-        {"3", "-", "r", "|", " ", "-", "-", "-", "-", "-", "r", "|", " ", "-", "-", "-", "-", "-", "r", "|", " ", "-", "-", "-", "-", "-", "r", "|", " ", "-", "-", "-", "-", "-", "r", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-"},
+        {"3", "-", " ", " ", " ", " ", " ", "0", " ", "s1", " ", "d", " ", "u", " ", "0", " ", "s1", " ", "d", " ", "u", " ", "0", " ", "s1", " ", "d", " ", "u", " ", "0", " ", "s1", " ", "d", " ", "u", " ", "0", " ", " ", " ", "d", " ", "-"},
+        {"3", "-", "r", "|", " ", "-", "-", "-", "-", "-", "r", "|", "s2", "-", "-", "-", "-", "-", "r", "|", "s2", "-", "-", "-", "-", "-", "r", "|", "s2", "-", "-", "-", "-", "-", "r", "|", "s2", "-", "-", "-", "-", "-", " ", "|", " ", "-"},
         {"3", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-"},
-        {"3", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-"},
+        {"3", "-", "0", "|", "0", "-", "-", "-", "-", "-", "0", "|", "0", "-", "-", "-", "-", "-", "0", "|", "0", "-", "-", "-", "-", "-", "0", "|", "0", "-", "-", "-", "-", "-", "0", "|", "0", "-", "-", "-", "-", "-", "0", "|", "0", "-"},
         {"3", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-"},
         {"3", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", "l", "-"},
-        {"3", "-", " ", "u", " ", " ", " ", " ", " ", " ", " ", "u", " ", " ", " ", " ", " ", " ", " ", "u", " ", " ", " ", " ", " ", " ", " ", "u", " ", " ", " ", " ", " ", " ", " ", "u", " ", " ", " ", " ", " ", " ", " ", " ", " ", "-"},
+        {"3", "-", " ", "u", " ", " ", " ", "0", " ", " ", " ", "u", " ", " ", " ", "0", " ", " ", " ", "u", " ", " ", " ", "0", " ", " ", " ", "u", " ", " ", " ", "0", " ", " ", " ", "u", " ", " ", " ", "0", " ", " ", " ", " ", " ", "-"},
         {"1", "-", " ", " ", " ", "=", " ", "=", " ", "=", "l", " ", " ", "=", " ", "=", " ", "=", "l", " ", " ", "=", " ", "=", " ", "=", "l", " ", " ", "=", " ", "=", " ", "=", "l", " ", " ", "=", " ", "=", " ", "=", "l", " ", " ", "-"},
-        {"3", "-", " ", " ", " ", "u", " ", " ", " ", " ", " ", " ", " ", "u", " ", " ", " ", " ", " ", " ", " ", "u", " ", " ", " ", " ", " ", " ", " ", "u", " ", " ", " ", " ", " ", " ", " ", "u", " ", " ", " ", " ", " ", " ", " ", "-"},
+        {"3", "-", " ", " ", " ", "u", " ", "0", " ", " ", " ", " ", " ", "u", " ", "0", " ", " ", " ", " ", " ", "u", " ", "0", " ", " ", " ", " ", " ", "u", " ", "0", " ", " ", " ", " ", " ", "u", " ", "0", " ", " ", " ", " ", " ", "-"},
         {"3", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"}};
 
-        
+        Timer t = new Timer(0, null);
+        t.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (Boundary b : getWalls("tLight")) {
+                    if(b.getColor()==Color.RED){
+                        if(b.isRedStage()){
+                            b.setColor(Color.GREEN);
+                            b.setRedStage(false);
+                        } else b.setRedStage(true);
+                    } else if(b.getColor()==Color.YELLOW)
+                            b.setColor(Color.RED);
+                            else if(b.getColor()==Color.GREEN)
+                                b.setColor(Color.YELLOW);
+                }
+            }
+        });
+
+        t.setRepeats(true);
+        t.setDelay(3000); //1 sec
+        t.start();
         
         createWalls(map);
     }
@@ -103,16 +123,16 @@ public class pnPrincipal extends JPanel implements ActionListener {
         g2d.fillRect(0, yOffset, getWidth(), getHeight()-yOffset);
 
         for (Boundary wall : walls) { 
-            //if(wall.getType()!="r"&&wall.getType()!="l"&&wall.getType()!="u"&&wall.getType()!="d"){
+            if(wall.getType()!="r"&&wall.getType()!="l"&&wall.getType()!="u"&&wall.getType()!="d"&&wall.getType()!="0"){
                 g2d.setColor(wall.getColor());
                 g2d.fillRect(wall.getPositionX(), wall.getPositionY(),
                 wall.getWidth() , wall.getHeight());}
-        //}
+        }
 
         for (Player bot : bots) { 
             g2d.setColor(bot.getColor());
             //g2d.transform(transform);
-            g2d.fillRect((int) bot.getPositionX(), (int) bot.getPositionY(), bot.getWidth(), bot.getHeight());
+            g2d.fillRect((int) bot.getPositionX(), (int) bot.getPositionY(), (int)bot.getWidth(), (int)bot.getHeight());
             g2d.setColor(Color.WHITE);
             g2d.fillRect((int) bot.getPositionX(), (int) bot.getPositionY(), 10, 10);
 
@@ -121,18 +141,17 @@ public class pnPrincipal extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(button)) {  
-            bots.add(new Player(this, stWidth*10 , yOffset + stHeight*7.5  , stWidth*3, stHeight*2, 1));
-            bots.add(new Player(this, stWidth*50 , yOffset + stHeight*7.5  , stWidth*3, stHeight*2, 1));
-            // bots.add(new Player(this, stWidth*70 , yOffset + stHeight*3.5  , stWidth*3, stHeight*2, 1));
-            // bots.add(new Player(this, stWidth*100 , yOffset + stHeight*3.5  , stWidth*3, stHeight*2, 1));
-            // bots.add(new Player(this, stWidth*10 , yOffset + stHeight*25.5  , stWidth*3, stHeight*2, 1));
-            // bots.add(new Player(this, stWidth*50 , yOffset + stHeight*25.5  , stWidth*3, stHeight*2, 1));
-            // bots.add(new Player(this, stWidth*100 , yOffset + stHeight*25.5  , stWidth*3, stHeight*2, 1));
-            // bots.add(new Player(this, stWidth*110 , yOffset + stHeight*25.5  , stWidth*3, stHeight*2, 1));
-            // bots.add(new Player(this, stWidth*10 , yOffset + stHeight*47.5  , stWidth*3, stHeight*2, 1));
-            // bots.add(new Player(this, stWidth*50 , yOffset + stHeight*47.5  , stWidth*3, stHeight*2, 1));
-            //bots.add(new Player(this, stWidth*100 , yOffset + stHeight*47.5  , stWidth*3, stHeight*2, 1));
-
+            
+            bots.add(new Player(this, stWidth*10 , yOffset + stHeight*7.5  , stWidth*2.5, stHeight*1.5, 1));
+            bots.add(new Player(this, stWidth*10 , yOffset + stHeight*51.5  , stWidth*2.5, stHeight*1.5, 1));
+            bots.add(new Player(this, stWidth*10 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));
+            bots.add(new Player(this, stWidth*40 , yOffset + stHeight*7.5  , stWidth*2.5, stHeight*1.5, 1));
+            bots.add(new Player(this, stWidth*40 , yOffset + stHeight*51.5  , stWidth*2.5, stHeight*1.5, 1));
+            bots.add(new Player(this, stWidth*40 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));
+            bots.add(new Player(this, stWidth*100 , yOffset + stHeight*7.5  , stWidth*2.5, stHeight*1.5, 1));
+            bots.add(new Player(this, stWidth*100 , yOffset + stHeight*51.5  , stWidth*2.5, stHeight*1.5, 1));
+            bots.add(new Player(this, stWidth*100 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));
+            bots.add(new Player(this, stWidth*85 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));
             // for (Player bot : bots) {
                 
             // }            
@@ -144,7 +163,7 @@ public class pnPrincipal extends JPanel implements ActionListener {
 
         //repaint();
     }
-    
+
     private int totalBWidth=0;
     private int totalBHeight=0;
     public void createWalls(String[][] mp){
@@ -168,6 +187,26 @@ public class pnPrincipal extends JPanel implements ActionListener {
                     case "|":
                     walls.add(new Boundary("lineV", totalBWidth, yOffset + totalBHeight, Color.YELLOW, rowHeight, colWidth));
                     break;
+                    case "s0": case "s1":case "s2":case "s3":
+                    Color tLightColor = Color.WHITE;
+                    boolean RedStage = false;
+                    switch(mp[row][col].charAt(1)){
+                        case '0':
+                            tLightColor = Color.GREEN;
+                        break;
+                        case '1':
+                            tLightColor = Color.YELLOW;
+                        break;
+                        case '2':
+                            tLightColor = Color.RED;
+                        break;
+                        case '3':
+                            tLightColor = Color.RED;
+                            RedStage = true;
+                        break;
+                    };
+                    walls.add(new Boundary("tLight", totalBWidth, yOffset + totalBHeight, tLightColor, rowHeight, colWidth, RedStage));
+                    break;
                     default:
                     walls.add(new Boundary(mp[row][col], totalBWidth, yOffset + totalBHeight, Color.DARK_GRAY, rowHeight, colWidth));
                     break;
@@ -189,6 +228,10 @@ public class pnPrincipal extends JPanel implements ActionListener {
 
     public int getyOffset() {
         return yOffset;
+    }
+
+    public ArrayList<Player> getBots() {
+        return bots;
     }
 
     public static void main(String[] args) {

@@ -9,6 +9,7 @@ public class Boundary {
     private int width;
     private int height;
     private String type;
+    private boolean RedStage;
 
     public Boundary(String t, int x, int y, Color c, int h, int w ){
         this.color= c;
@@ -19,10 +20,24 @@ public class Boundary {
         this.width = w; 
     }
 
+    public Boundary(String t, int x, int y, Color c, int h, int w, boolean r){
+        this.color= c;
+        this.positionX = x;
+        this.positionY = y;
+        this.type = t;
+        this.height = h;
+        this.width = w;
+        this.RedStage = r; 
+    }
+
     public String getType() {
         return type;
     }
-    
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
     public Color getColor() {
         return color;
     }
@@ -41,5 +56,13 @@ public class Boundary {
 
     public int getHeight() {
         return height;
+    }
+
+    public boolean isRedStage() {
+        return RedStage;
+    }
+
+    public void setRedStage(boolean redStage) {
+        RedStage = redStage;
     }
 }
