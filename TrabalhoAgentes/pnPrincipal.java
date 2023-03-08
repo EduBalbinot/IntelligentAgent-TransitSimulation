@@ -43,30 +43,6 @@ public class pnPrincipal extends JPanel implements ActionListener {
         add(Box.createVerticalGlue());
 
         map = new String[][] 
-        // mão inglesa
-        // {{"3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3"},
-        //  {"3", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
-        //  {"3", "-", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "-"},
-        //  {"1", "-", " ", " ", " ", "=", " ", "=", " ", "=", " ", " ", " ", "=", " ", "=", " ", "=", " ", " ", " ", "=", " ", "=", " ", "=", " ", " ", " ", "=", " ", "=", " ", "=", " ", " ", " ", "=", " ", "=", " ", "=", "l", " ", " ", "-"},
-        //  {"3", "-", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", " ", " ", "-"},
-        //  {"3", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-"},
-        //  {"3", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-"},
-        //  {"3", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-"},
-        //  {"3", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-"},
-        //  {"3", "-", "r", "|", " ", "-", "-", "-", "-", "-", "r", "|", " ", "-", "-", "-", "-", "-", "r", "|", " ", "-", "-", "-", "-", "-", "r", "|", " ", "-", "-", "-", "-", "-", "r", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-"},
-        //  {"3", "-", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "d", " ", " ", " ", " ", " ", " ", " ", "-"},
-        //  {"1", "-", " ", " ", "r", "=", " ", "=", " ", "=", " ", " ", " ", "=", " ", "=", " ", "=", " ", " ", " ", "=", " ", "=", " ", "=", " ", " ", " ", "=", " ", "=", " ", "=", " ", " ", " ", "=", " ", "=", " ", "=", " ", " ", " ", "-"},
-        //  {"3", "-", " ", " ", " ", " ", " ", " ", " ", "u", " ", " ", " ", " ", " ", " ", " ", "u", " ", " ", " ", " ", " ", " ", " ", "u", " ", " ", " ", " ", " ", " ", " ", "u", " ", " ", " ", " ", " ", " ", " ", "u", " ", " ", " ", "-"},
-        //  {"3", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", "l", "-", "-", "-", "-", "-", " ", "|", "l", "-", "-", "-", "-", "-", " ", "|", "l", "-", "-", "-", "-", "-", " ", "|", "l", "-", "-", "-", "-", "-", " ", "|", "l", "-"},
-        //  {"3", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-"},
-        //  {"3", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-"},
-        //  {"3", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-", "-", "-", "-", "-", " ", " ", " ", "-"},
-        //  {"3", "-", "r", "|", " ", "-", "-", "-", "-", "-", "r", "|", " ", "-", "-", "-", "-", "-", "r", "|", " ", "-", "-", "-", "-", "-", "r", "|", " ", "-", "-", "-", "-", "-", "r", "|", " ", "-", "-", "-", "-", "-", " ", "|", " ", "-"},
-        //  {"3", "-", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "u", " ", "-"},
-        //  {"1", "-", " ", " ", "r", "=", " ", "=", " ", "=", " ", " ", "r", "=", " ", "=", " ", "=", " ", " ", "r", "=", " ", "=", " ", "=", " ", " ", "r", "=", " ", "=", " ", "=", " ", " ", "r", "=", " ", "=", " ", "=", " ", " ", " ", "-"},
-        //  {"3", "-", " ", " ", " ", " ", " ", " ", " ", "u", " ", " ", " ", " ", " ", " ", " ", "u", " ", " ", " ", " ", " ", " ", " ", "u", " ", " ", " ", " ", " ", " ", " ", "u", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "-"},
-        //  {"3", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"}};
-        
         {{"3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3", "3", "3", "3", "3", "3", "1", "3", "3"},
         {"3", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"},
         {"3", "-", " ", " ", " ", " ", " ", "0", " ", "d", " ", " ", " ", " ", " ", "0", " ", "d", " ", " ", " ", " ", " ", "0", " ", "d", " ", " ", " ", " ", " ", "0", " ", "d", " ", " ", " ", " ", " ", "0", " ", "d", " ", " ", " ", "-"},
@@ -94,7 +70,7 @@ public class pnPrincipal extends JPanel implements ActionListener {
         t.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (Boundary b : getWalls("tLight")) {
+                for (Boundary b : getWalls('s')) {
                     if(b.getColor()==Color.RED){
                         if(b.isRedStage()){
                             b.setColor(Color.GREEN);
@@ -114,54 +90,37 @@ public class pnPrincipal extends JPanel implements ActionListener {
         
         createWalls(map);
     }
-
     public void paint(Graphics g) {
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
-
         g2d.setColor(Color.BLACK); //background
-        g2d.fillRect(0, yOffset, getWidth(), getHeight()-yOffset);
+        g2d.fillRect(0, yOffset, getWidth(), getHeight() - yOffset);
 
         for (Boundary wall : walls) { 
-            if(wall.getType()!="r"&&wall.getType()!="l"&&wall.getType()!="u"&&wall.getType()!="d"&&wall.getType()!="0"){
-                g2d.setColor(wall.getColor());
-                g2d.fillRect(wall.getPositionX(), wall.getPositionY(),
-                wall.getWidth() , wall.getHeight());}
+            wall.drawWall(g2d);
         }
 
         for (Player bot : bots) { 
-            g2d.setColor(bot.getColor());
-            //g2d.transform(transform);
-            g2d.fillRect((int) bot.getPositionX(), (int) bot.getPositionY(), (int)bot.getWidth(), (int)bot.getHeight());
-            g2d.setColor(Color.WHITE);
-            g2d.fillRect((int) bot.getPositionX(), (int) bot.getPositionY(), 10, 10);
-
+            bot.drawBot(g2d);
         }
     }
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(button)) {  
-            
             bots.add(new Player(this, stWidth*10 , yOffset + stHeight*7.5  , stWidth*2.5, stHeight*1.5, 1));
             bots.add(new Player(this, stWidth*10 , yOffset + stHeight*51.5  , stWidth*2.5, stHeight*1.5, 1));
             bots.add(new Player(this, stWidth*10 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));
             bots.add(new Player(this, stWidth*40 , yOffset + stHeight*7.5  , stWidth*2.5, stHeight*1.5, 1));
             bots.add(new Player(this, stWidth*40 , yOffset + stHeight*51.5  , stWidth*2.5, stHeight*1.5, 1));
             bots.add(new Player(this, stWidth*40 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));
-            bots.add(new Player(this, stWidth*100 , yOffset + stHeight*7.5  , stWidth*2.5, stHeight*1.5, 1));
-            bots.add(new Player(this, stWidth*100 , yOffset + stHeight*51.5  , stWidth*2.5, stHeight*1.5, 1));
-            bots.add(new Player(this, stWidth*100 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));
-            bots.add(new Player(this, stWidth*85 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));
-            // for (Player bot : bots) {
-                
-            // }            
+            bots.add(new Player(this, stWidth*110 , yOffset + stHeight*7.5  , stWidth*2.5, stHeight*1.5, 1));
+            bots.add(new Player(this, stWidth*110 , yOffset + stHeight*51.5  , stWidth*2.5, stHeight*1.5, 1));
+            bots.add(new Player(this, stWidth*110 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));
+            bots.add(new Player(this, stWidth*80 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));           
         }
-
          for (Player a: this.bots) {
             a.execute();
         }
-
-        //repaint();
     }
 
     private int totalBWidth=0;
@@ -205,7 +164,7 @@ public class pnPrincipal extends JPanel implements ActionListener {
                             RedStage = true;
                         break;
                     };
-                    walls.add(new Boundary("tLight", totalBWidth, yOffset + totalBHeight, tLightColor, rowHeight, colWidth, RedStage));
+                    walls.add(new Boundary(mp[row][col], totalBWidth, yOffset + totalBHeight, tLightColor, rowHeight, colWidth, RedStage));
                     break;
                     default:
                     walls.add(new Boundary(mp[row][col], totalBWidth, yOffset + totalBHeight, Color.DARK_GRAY, rowHeight, colWidth));
@@ -217,10 +176,10 @@ public class pnPrincipal extends JPanel implements ActionListener {
         }
     }
 
-    public ArrayList<Boundary> getWalls(String f) {
+    public ArrayList<Boundary> getWalls(char f) {
         ArrayList<Boundary> filtro = new ArrayList<Boundary>();
         for (Boundary b : walls) {
-            if (b.getType().contains(f)) 
+            if (b.getType().charAt(0)==f)
                 filtro.add(b);
         }
         return filtro;

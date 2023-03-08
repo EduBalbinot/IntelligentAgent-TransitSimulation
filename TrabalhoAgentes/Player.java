@@ -3,6 +3,7 @@ package TrabalhoAgentes;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
+import java.awt.Graphics2D;
 
 
 import javax.swing.*;
@@ -48,39 +49,39 @@ public class Player extends SwingWorker<Object, Object> {
 			try {
                 // if(this.canTurn) this.color = Color.GREEN;
                 // else this.color = Color.RED;
-                if(this.checkColision(panel.getWalls("wall"), true)){ //Colisão com paredes
+                if(this.checkColision(panel.getWalls('w'), true)){ //Colisão com paredes
                     this.turn(); 
                 }
-                if(this.checkColision(panel.getWalls("0"), true)){ //Colisão com trigger de curva 
+
+                if(this.checkColision(panel.getWalls('0'), true)){ //Colisão com trigger de curva 
                     this.canTurn=true;
                 }
+
                 if(this.checkTransit(panel.getBots())){
                     this.collidingCar=true;
                 } else {
                     this.collidingCar=false;
-                    if(this.checkColision(panel.getWalls("tLight"), false)){ //Colisão com semáforo (contínua)
+                    if(this.checkColision(panel.getWalls('s'), false)){ //Colisão com semáforo (contínua)
                         //lastWall=null;
                         if(lastWall.getColor()==Color.GREEN){
                             this.collidingCar=false;
                         } else {
-                            this.collidingCar=true;
+                            if(velocity>0&&lastWall.getColor()==Color.YELLOW)
+                                this.collidingCar=false;
+                            else
+                                this.collidingCar=true;
                         }   
                     }
                 }
                 
 
-                String[] gates = {"r","d","l","u"}; //Colisão com curvas
-                for (String gate : gates) { // lógica para virar em cruzamentos (50% de chance)
+                char[] gates = {'r','d','l','u'}; //Colisão com curvas
+                for (char gate : gates) { // lógica para virar em cruzamentos (50% de chance)
                     if(this.checkColision(panel.getWalls(gate),true)&&ThreadLocalRandom.current().nextBoolean()&&this.canTurn){
                         //char randomDir = gate.charAt(new Random().nextInt(gate.length())); // Pra mais de uma direção
-                        newDirection(gate.charAt(0));
+                        newDirection(gate);
                     } 
                 }
-
-                // if(this.checkTransit(panel.getBots())){
-                //    this.slowDown();
-                // } 
-
               
                 if(this.collidingCar){
                     this.slowDown();
@@ -120,6 +121,14 @@ public class Player extends SwingWorker<Object, Object> {
         }else if(directionY<0){ // canto superior esquerdo
             newDirection('l');
         }
+    }
+    
+    public void drawBot(Graphics2D g2d){
+        g2d.setColor(this.getColor());
+        //g2d.transform(transform);
+        g2d.fillRect((int) this.getPositionX(), (int) this.getPositionY(), (int)this.getWidth(), (int)this.getHeight());
+        g2d.setColor(Color.WHITE);
+        g2d.fillRect((int) this.getPositionX(), (int) this.getPositionY(), 10, 10);
     }
 
     public void newDirection(char d){
