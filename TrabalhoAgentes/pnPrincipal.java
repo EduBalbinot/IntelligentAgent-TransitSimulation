@@ -66,6 +66,8 @@ public class pnPrincipal extends JPanel implements ActionListener {
         {"3", "-", " ", " ", " ", "u", " ", "0", " ", " ", " ", " ", " ", "u", " ", "0", " ", " ", " ", " ", " ", "u", " ", "0", " ", " ", " ", " ", " ", "u", " ", "0", " ", " ", " ", " ", " ", "u", " ", "0", " ", " ", " ", " ", " ", "-"},
         {"3", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"}};
 
+        createWalls(map);
+
         Timer t = new Timer(0, null);
         t.addActionListener(new ActionListener() {
             @Override
@@ -87,8 +89,17 @@ public class pnPrincipal extends JPanel implements ActionListener {
         t.setRepeats(true);
         t.setDelay(3000); //1 sec
         t.start();
-        
-        createWalls(map);
+
+        bots.add(new Player(this, stWidth*10 , yOffset + stHeight*7.5  , stWidth*2.5, stHeight*1.5, 1));
+        bots.add(new Player(this, stWidth*10 , yOffset + stHeight*51.5  , stWidth*2.5, stHeight*1.5, 1));
+        bots.add(new Player(this, stWidth*10 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));
+        bots.add(new Player(this, stWidth*40 , yOffset + stHeight*7.5  , stWidth*2.5, stHeight*1.5, 1));
+        bots.add(new Player(this, stWidth*40 , yOffset + stHeight*51.5  , stWidth*2.5, stHeight*1.5, 1));
+        bots.add(new Player(this, stWidth*40 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));
+        bots.add(new Player(this, stWidth*110 , yOffset + stHeight*7.5  , stWidth*2.5, stHeight*1.5, 1));
+        bots.add(new Player(this, stWidth*110 , yOffset + stHeight*51.5  , stWidth*2.5, stHeight*1.5, 1));
+        bots.add(new Player(this, stWidth*110 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));
+        bots.add(new Player(this, stWidth*80 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1)); 
     }
     public void paint(Graphics g) {
         super.paint(g);
@@ -106,17 +117,7 @@ public class pnPrincipal extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(button)) {  
-            bots.add(new Player(this, stWidth*10 , yOffset + stHeight*7.5  , stWidth*2.5, stHeight*1.5, 1));
-            bots.add(new Player(this, stWidth*10 , yOffset + stHeight*51.5  , stWidth*2.5, stHeight*1.5, 1));
-            bots.add(new Player(this, stWidth*10 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));
-            bots.add(new Player(this, stWidth*40 , yOffset + stHeight*7.5  , stWidth*2.5, stHeight*1.5, 1));
-            bots.add(new Player(this, stWidth*40 , yOffset + stHeight*51.5  , stWidth*2.5, stHeight*1.5, 1));
-            bots.add(new Player(this, stWidth*40 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));
-            bots.add(new Player(this, stWidth*110 , yOffset + stHeight*7.5  , stWidth*2.5, stHeight*1.5, 1));
-            bots.add(new Player(this, stWidth*110 , yOffset + stHeight*51.5  , stWidth*2.5, stHeight*1.5, 1));
-            bots.add(new Player(this, stWidth*110 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));
-            bots.add(new Player(this, stWidth*80 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));           
+        if (e.getSource().equals(button)) {            
         }
          for (Player a: this.bots) {
             a.execute();

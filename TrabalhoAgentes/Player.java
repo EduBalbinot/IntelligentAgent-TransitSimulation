@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 import java.awt.Graphics2D;
-
+import java.awt.geom.AffineTransform;
 
 import javax.swing.*;
 
@@ -23,6 +23,8 @@ public class Player extends SwingWorker<Object, Object> {
     private double aceleration;
     private Color color;
     private Boundary lastWall;
+    private boolean lastTLightG;
+    private boolean brakes;
 
     private int ang;
 
@@ -38,9 +40,11 @@ public class Player extends SwingWorker<Object, Object> {
         this.velocity = 3;
         this.executar = true;
         this.color = new Color(ThreadLocalRandom.current().nextInt(255),ThreadLocalRandom.current().nextInt(255),ThreadLocalRandom.current().nextInt(255));
+        this.lastTLightG = false;
         this.ang = 0;
         this.aceleration=0.5;
         this.collidingCar=false;
+        this.brakes = false;
     }
 
     @Override
@@ -54,6 +58,7 @@ public class Player extends SwingWorker<Object, Object> {
                 }
 
                 if(this.checkColision(panel.getWalls('0'), true)){ //Colisão com trigger de curva 
+                    this.lastTLightG = false;
                     this.canTurn=true;
                 }
 
@@ -62,11 +67,11 @@ public class Player extends SwingWorker<Object, Object> {
                 } else {
                     this.collidingCar=false;
                     if(this.checkColision(panel.getWalls('s'), false)){ //Colisão com semáforo (contínua)
-                        //lastWall=null;
                         if(lastWall.getColor()==Color.GREEN){
                             this.collidingCar=false;
+                            this.lastTLightG = true;
                         } else {
-                            if(velocity>0&&lastWall.getColor()==Color.YELLOW)
+                            if(lastTLightG&&lastWall.getColor()==Color.YELLOW)
                                 this.collidingCar=false;
                             else
                                 this.collidingCar=true;
@@ -124,11 +129,33 @@ public class Player extends SwingWorker<Object, Object> {
     }
     
     public void drawBot(Graphics2D g2d){
+        AffineTransform old = g2d.getTransform();
+        double CarW = pnPrincipal.stWidth*2.5;
+        double CarH = pnPrincipal.stHeight*1.5;
+        int LightsW = (int) (CarW * 0.15);
+        int LightsH = (int) (CarH * 0.4);
+        int frontGlasssW = (int) (CarW * 0.2);
+        int backGlasssW = (int) (CarW * 0.15);
+        int GlasssH = (int) (CarH * 0.9);
+        g2d.rotate(Math.toRadians(this.ang),this.getPositionX() + CarW/2 ,this.getPositionY() + CarH/2);
         g2d.setColor(this.getColor());
-        //g2d.transform(transform);
-        g2d.fillRect((int) this.getPositionX(), (int) this.getPositionY(), (int)this.getWidth(), (int)this.getHeight());
-        g2d.setColor(Color.WHITE);
-        g2d.fillRect((int) this.getPositionX(), (int) this.getPositionY(), 10, 10);
+        g2d.fillRect((int) this.getPositionX(), (int) this.getPositionY(), (int)CarW, (int)CarH);
+        g2d.setColor(Color.YELLOW);
+        g2d.fillRect((int)(this.getPositionX() + CarW - LightsW), (int)(this.getPositionY()), LightsW, LightsH);
+        g2d.fillRect((int)(this.getPositionX() + CarW - LightsW), (int)(this.getPositionY() + CarH - LightsH*1), LightsW, LightsH);
+        Color bks = new Color(136, 0, 21);
+        if(this.brakes)
+            bks = Color.RED;
+        g2d.setColor(bks);
+        g2d.fillRect((int)(this.getPositionX()), (int)(this.getPositionY()), LightsW, LightsH);
+        g2d.fillRect((int)(this.getPositionX()), (int)(this.getPositionY() + CarH - LightsH), LightsW, LightsH);
+        g2d.setColor(Color.LIGHT_GRAY);
+        g2d.fillRect((int)(this.getPositionX()+CarW*0.6), (int)(this.getPositionY() + CarH/2 - GlasssH/2), frontGlasssW, GlasssH);
+        g2d.fillRect((int)(this.getPositionX()+CarW*0.2), (int)(this.getPositionY() + CarH/2 - GlasssH/2), backGlasssW, GlasssH);
+        g2d.setTransform(old);
+        // g2d.setColor(Color.WHITE);
+        // g2d.fillRect((int) this.getPositionX(), (int) this.getPositionY(), 10, 10);
+
     }
 
     public void newDirection(char d){
@@ -137,6 +164,7 @@ public class Player extends SwingWorker<Object, Object> {
         int pathHeight = pnPrincipal.stHeight * 3;
         switch(d){
             case 'u':
+            this.ang=-90;
             if(this.directionX < 0){
                 this.positionX += pathWidth / 2 - this.height / 2;
                 this.positionY += this.height - this.width;
@@ -149,6 +177,7 @@ public class Player extends SwingWorker<Object, Object> {
                 this.directionY = -1;
             break;
             case 'd':
+            this.ang=90;
             if(this.directionX > 0){
                 this.positionX += this.width - pathWidth / 2 - this.height / 2;
                 this.positionY += 0;
@@ -161,6 +190,7 @@ public class Player extends SwingWorker<Object, Object> {
                 this.directionY = 1;
             break;
             case 'l':
+            this.ang=180;
             if(this.directionY > 0){
                 this.positionX += this.width - this.height;
                 this.positionY += this.height - pathHeight / 2 - this.width / 2;
@@ -173,6 +203,7 @@ public class Player extends SwingWorker<Object, Object> {
                 this.directionY = 0;
             break;
             case 'r':
+            this.ang=0;
             if(this.directionY < 0){
                 this.positionX += 0;
                 this.positionY += pathHeight / 2 - this.width / 2;
@@ -205,6 +236,7 @@ public class Player extends SwingWorker<Object, Object> {
     //     this.turnXtoY();
     // }
     private void slowDown(){
+        this.brakes = true;
         if(this.velocity>0){
             this.velocity-=this.aceleration;
             if(this.velocity<0)
@@ -213,6 +245,7 @@ public class Player extends SwingWorker<Object, Object> {
     }
 
     private void speedUp(){
+        this.brakes = false;
         if(this.velocity<3){
             this.velocity+=this.aceleration;
             if(this.velocity>3)
