@@ -90,16 +90,16 @@ public class pnPrincipal extends JPanel implements ActionListener {
         t.setDelay(3000); //1 sec
         t.start();
 
-        bots.add(new Player(this, stWidth*10 , yOffset + stHeight*7.5  , stWidth*2.5, stHeight*1.5, 1));
-        bots.add(new Player(this, stWidth*10 , yOffset + stHeight*51.5  , stWidth*2.5, stHeight*1.5, 1));
-        bots.add(new Player(this, stWidth*10 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));
-        bots.add(new Player(this, stWidth*40 , yOffset + stHeight*7.5  , stWidth*2.5, stHeight*1.5, 1));
-        bots.add(new Player(this, stWidth*40 , yOffset + stHeight*51.5  , stWidth*2.5, stHeight*1.5, 1));
-        bots.add(new Player(this, stWidth*40 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));
-        bots.add(new Player(this, stWidth*110 , yOffset + stHeight*7.5  , stWidth*2.5, stHeight*1.5, 1));
-        bots.add(new Player(this, stWidth*110 , yOffset + stHeight*51.5  , stWidth*2.5, stHeight*1.5, 1));
-        bots.add(new Player(this, stWidth*110 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1));
-        bots.add(new Player(this, stWidth*80 , yOffset + stHeight*29.5  , stWidth*2.5, stHeight*1.5, 1)); 
+        bots.add(new Player(this, stWidth*10 ,  yOffset + stHeight*7.5  ,   stWidth*2.5, stHeight*1.5));
+        bots.add(new Player(this, stWidth*80 ,  yOffset + stHeight*29.5  ,  stWidth*2.5, stHeight*1.5)); 
+        bots.add(new Player(this, stWidth*10 ,  yOffset + stHeight*51.5  ,  stWidth*2.5, stHeight*1.5));
+        bots.add(new Player(this, stWidth*10 ,  yOffset + stHeight*29.5  ,  stWidth*2.5, stHeight*1.5));
+        bots.add(new Player(this, stWidth*40 ,  yOffset + stHeight*7.5  ,   stWidth*2.5, stHeight*1.5));
+        bots.add(new Player(this, stWidth*40 ,  yOffset + stHeight*51.5  ,  stWidth*2.5, stHeight*1.5));
+        bots.add(new Player(this, stWidth*40 ,  yOffset + stHeight*29.5  ,  stWidth*2.5, stHeight*1.5));
+        bots.add(new Player(this, stWidth*110 , yOffset + stHeight*7.5  ,   stWidth*2.5, stHeight*1.5));
+        bots.add(new Player(this, stWidth*110 , yOffset + stHeight*51.5  ,  stWidth*2.5, stHeight*1.5));
+        bots.add(new Player(this, stWidth*110 , yOffset + stHeight*29.5  ,  stWidth*2.5, stHeight*1.5));
     }
     public void paint(Graphics g) {
         super.paint(g);
@@ -197,10 +197,8 @@ public class pnPrincipal extends JPanel implements ActionListener {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Trânsito de Xaxim");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pnPrincipal panel = new pnPrincipal();
-        frame.add(panel);
-        
-        frame.add(panel);
+        //pnPrincipal panel = ;
+        frame.add(new pnPrincipal());
         frame.setSize(800, 500);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);

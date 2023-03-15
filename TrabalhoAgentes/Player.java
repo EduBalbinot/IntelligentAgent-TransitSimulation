@@ -15,6 +15,7 @@ public class Player extends SwingWorker<Object, Object> {
     private boolean collidingCar;
     private double positionX;
     private double positionY;
+    private double maxVelocity;
     private double velocity;
     private double directionX;
     private double directionY;
@@ -28,21 +29,22 @@ public class Player extends SwingWorker<Object, Object> {
 
     private int ang;
 
-    public Player(pnPrincipal panel, double x, double y, double w, double h, int vx){
+    public Player(pnPrincipal panel, double x, double y, double w, double h){
         this.panel=panel;
         this.positionX=x;
         this.positionY=y;
         this.width=w;
         this.height=h;
-        this.directionX = vx;
-        this.directionY = 1 - vx;
+        this.directionX = 1;
+        this.directionY = 0;
         this.canTurn = true;
-        this.velocity = 3;
+        this.maxVelocity = ThreadLocalRandom.current().nextDouble(1,3);
+        this.velocity = this.maxVelocity;
         this.executar = true;
-        this.color = new Color(ThreadLocalRandom.current().nextInt(255),ThreadLocalRandom.current().nextInt(255),ThreadLocalRandom.current().nextInt(255));
+        this.color = new Color( (int) (255 * ((this.maxVelocity - 1) / 2.0)), (int) (255 * ((3 - this.maxVelocity) / 2.0)),50);
         this.lastTLightG = false;
         this.ang = 0;
-        this.aceleration=0.5;
+        this.aceleration=0.2*this.maxVelocity;
         this.collidingCar=false;
         this.brakes = false;
     }
@@ -153,8 +155,6 @@ public class Player extends SwingWorker<Object, Object> {
         g2d.fillRect((int)(this.getPositionX()+CarW*0.6), (int)(this.getPositionY() + CarH/2 - GlasssH/2), frontGlasssW, GlasssH);
         g2d.fillRect((int)(this.getPositionX()+CarW*0.2), (int)(this.getPositionY() + CarH/2 - GlasssH/2), backGlasssW, GlasssH);
         g2d.setTransform(old);
-        // g2d.setColor(Color.WHITE);
-        // g2d.fillRect((int) this.getPositionX(), (int) this.getPositionY(), 10, 10);
 
     }
 
@@ -218,23 +218,6 @@ public class Player extends SwingWorker<Object, Object> {
         }
     }
 
-
-    // public void turnAnimation(){
-    //     for(int i=0;i<=2;i++){
-    //         try {
-    //             ang++;
-    //             panel.transform.rotate(Math.toRadians(this.ang), this.positionX, this.positionY);
-    //             panel.repaint();
-	// 			synchronized (this) {
-	// 				this.wait(10);
-	// 			}
-	// 		} catch (Exception e) {
-	// 			e.printStackTrace();
-	// 		}
-    //     }
-    //     ang=0;
-    //     this.turnXtoY();
-    // }
     private void slowDown(){
         this.brakes = true;
         if(this.velocity>0){
@@ -246,7 +229,7 @@ public class Player extends SwingWorker<Object, Object> {
 
     private void speedUp(){
         this.brakes = false;
-        if(this.velocity<3){
+        if(this.velocity<this.maxVelocity){
             this.velocity+=this.aceleration;
             if(this.velocity>3)
                 this.velocity=3;

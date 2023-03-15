@@ -33,6 +33,7 @@ public class Boundary {
     }
 
     public void drawWall(Graphics2D g2d){
+        // if(true){
         if(this.getType()!="r"&&this.getType()!="l"&&this.getType()!="u"&&this.getType()!="d"&&this.getType()!="0"){
             int ang = 0;
             int tLightHeight = 17;
