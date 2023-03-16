@@ -37,7 +37,7 @@ public class pnPrincipal extends JPanel implements ActionListener {
         Timer timer = new Timer(10, this);
         timer.start();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        button = new JButton("Button");
+        button = new JButton("Reset");
         add(button);
         button.addActionListener(this);
         add(Box.createVerticalGlue());
@@ -117,7 +117,10 @@ public class pnPrincipal extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(button)) {            
+        if (e.getSource().equals(button)) { 
+            for (Player a: this.bots) {
+                a.reset();
+            }           
         }
          for (Player a: this.bots) {
             a.execute();

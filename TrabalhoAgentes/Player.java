@@ -13,12 +13,16 @@ public class Player extends SwingWorker<Object, Object> {
     private boolean executar;
     private boolean canTurn;
     private boolean collidingCar;
+    private double fPositionX;
+    private double fPositionY;
     private double positionX;
     private double positionY;
     private double maxVelocity;
     private double velocity;
     private double directionX;
     private double directionY;
+    private double fWidth;
+    private double fHeight;
     private double width;
     private double height;
     private double aceleration;
@@ -31,10 +35,14 @@ public class Player extends SwingWorker<Object, Object> {
 
     public Player(pnPrincipal panel, double x, double y, double w, double h){
         this.panel=panel;
-        this.positionX=x;
-        this.positionY=y;
-        this.width=w;
-        this.height=h;
+        this.fPositionX=x;
+        this.fPositionY=y;
+        this.positionX=this.fPositionX;
+        this.positionY=this.fPositionY;
+        this.fHeight = h;
+        this.fWidth = w;
+        this.width=this.fWidth;
+        this.height=this.fHeight;
         this.directionX = 1;
         this.directionY = 0;
         this.canTurn = true;
@@ -286,23 +294,34 @@ public class Player extends SwingWorker<Object, Object> {
     private boolean checkColision(ArrayList<Boundary> walls, boolean first) {
         for (Boundary wall : walls) {
             thisRightSideX = this.positionX + this.width;
-                thisLeftSideX = this.positionX;
-                botRightSideX = wall.getPositionX();
-                botLeftSideX = wall.getPositionX() + wall.getWidth();
-                thisTopSideY = this.positionY;
-                thisBotSideY = this.positionY + this.height;
-                botTopSideY = wall.getPositionY();
-                botBotSideY = wall.getPositionY() + wall.getHeight();
-                if(!(lastWall==wall)||!first)
-                    if(thisRightSideX >= botRightSideX && thisLeftSideX <= botLeftSideX &&
-                        thisBotSideY > botTopSideY && thisTopSideY <= botBotSideY){
-                        lastWall = wall;
-                        return true;
-                    }
+            thisLeftSideX = this.positionX;
+            botRightSideX = wall.getPositionX();
+            botLeftSideX = wall.getPositionX() + wall.getWidth();
+            thisTopSideY = this.positionY;
+            thisBotSideY = this.positionY + this.height;
+            botTopSideY = wall.getPositionY();
+            botBotSideY = wall.getPositionY() + wall.getHeight();
+            if(!(lastWall==wall)||!first)
+                if(thisRightSideX >= botRightSideX && thisLeftSideX <= botLeftSideX &&
+                    thisBotSideY > botTopSideY && thisTopSideY <= botBotSideY){
+                    lastWall = wall;
+                    return true;
+                }
         }
         return false;
     }
 
+    public void reset(){
+        this.positionX = this.fPositionX;
+        this.positionY = this.fPositionY;
+        this.velocity = this.maxVelocity;
+        this.width = this.fWidth;
+        this.height = this.fHeight;
+        this.directionX = 1;
+        this.directionY = 0;
+        this.ang = 0;
+    }
+    
     public void turnXtoY(){
         double tempWidth = this.width;
         this.width = this.height;
